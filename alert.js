@@ -98,8 +98,10 @@ function getUserType(callback) {
     console.log('proxyUrl: ', proxyUrl);
     ajax.get(proxyUrl, {}, function(res) {
         try {
-            res = JSON.parse(res);
-            return callback(res.product);
+            var matches = res.match(/{[\s]*"shop-sheriff-user-type"[\s:{]*"type" : "(admin|user)"[\s]*}\s*}/);
+            var type = matches[1]; // not the whole matched string, but the first matched selector in parenthesis
+            console.log('Type: ', type);
+            return callback(type);
         } catch(e) {
             console.log('Bad user type', e);
         }
@@ -109,7 +111,7 @@ function getUserType(callback) {
 var isProductPage = window.location.href.indexOf('products') !== -1;
 if(isProductPage) {
     getUserType(function(typeResponse) {
-        var type = typeResponse.type;
+        var type = typeResponse;
         onlyParseProducts(function(productResponse) {
             var product = productResponse.product;
             var input = {
