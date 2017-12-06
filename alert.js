@@ -101,7 +101,7 @@ function getUserType(callback) {
             res = JSON.parse(res);
             return callback(res.product);
         } catch(e) {
-            console.log('Bad user type');
+            console.log('Bad user type', e);
         }
     });
 }
