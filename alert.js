@@ -28,10 +28,18 @@ ajax.send = function (url, callback, method, data, async) {
         async = true;
     }
     var x = ajax.x();
+    var status;
+    var data;
     x.open(method, url, async);
     x.onreadystatechange = function () {
         if (x.readyState == 4) {
-            callback(x.responseText)
+            status = x.status;
+            if (status === 200) {
+                data = JSON.parse(x.responseText);
+                callback(data);
+            } else {
+                callback(x.responseText);
+            }
         }
     };
     if (method == 'POST') {
