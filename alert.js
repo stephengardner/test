@@ -56,6 +56,6 @@ ajax.post = function (url, data, callback, async) {
     ajax.send(url, callback, 'POST', query.join('&'), async)
 };
 
-ajax.get(window.location.href + '.json', function(res) {
+ajax.get(window.location.href + '.json', {}, function(res) {
   console.log("RESPONSE:", res);
 });
