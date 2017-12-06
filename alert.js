@@ -1,1 +1,1 @@
-alert();
+alert(window.location.href);
