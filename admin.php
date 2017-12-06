@@ -4,3 +4,17 @@ header("Content-Type: application/liquid");
 
 ?>
 
+{% capture CFH %}{{ content_for_header  }}{% endcapture %}
+
+{% if CFH contains 'admin_bar_iframe' %}
+{% assign admin = true %}
+{% elsif CFH contains 'shopify-previewed-theme' %}
+{% assign admin = true %}
+{% endif %}
+{% if admin %}
+<!-- User is an admin -->
+admin...
+{% else %}
+<!-- User is not an admin -->
+not admin...
+{% endif %}
