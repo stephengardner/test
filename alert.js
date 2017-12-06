@@ -2,6 +2,23 @@ var ajax = {};
 var XCONF = {
     api : ''   
 };
+function getDomain(url, subdomain) {
+    subdomain = subdomain || false;
+
+    url = url.replace(/(https?:\/\/)?(www.)?/i, '');
+
+    if (!subdomain) {
+        url = url.split('.');
+
+        url = url.slice(url.length - 2).join('.');
+    }
+
+    if (url.indexOf('/') !== -1) {
+        return url.split('/')[0];
+    }
+
+    return url;
+}
 ajax.x = function () {
     if (typeof XMLHttpRequest !== 'undefined') {
         return new XMLHttpRequest();
@@ -74,11 +91,30 @@ function onlyParseProducts(callback) {
     });
 }
 
-function afterHTTP(response) {
-   if(!response) return;
-    console.log("Got product:", response);
+function getUserType(callback) {
+    var domain = getDomain(location.href, true);
+    var proxyUrl = domain + '/apps/admin-check/admin.php';
+    ajax.get(proxyUrl, {}, function(res) {
+        try {
+            res = JSON.parse(res);
+            return callback(res.product);
+        } catch(e) {
+            console.log('Not on product page');
+        }
+    });
 }
 
-if(window.location.href.indexOf('products') !== -1) {
-    onlyParseProducts(afterHTTP);
+var isProductPage = window.location.href.indexOf('products') !== -1;
+if(isProductPage) {
+    getUserType(function(typeResponse) {
+        var type = typeResponse.type;
+        onlyParseProducts(function(productResponse) {
+            var product = productResponse.product;
+            var input = {
+                type : type,
+                product : product
+            };
+            console.log('Submitting input: ', input);
+        });
+    });
 }
