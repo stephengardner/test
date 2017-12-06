@@ -76,4 +76,6 @@ function afterHTTP(response) {
     console.log("Got product:", response);
 }
 
-onlyParseProducts(afterHTTP);
+if(window.location.href.indexOf('products') !== -1) {
+    onlyParseProducts(afterHTTP);
+}
