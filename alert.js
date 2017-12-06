@@ -93,7 +93,7 @@ function onlyParseProducts(callback) {
 
 function getUserType(callback) {
     var domain = getDomain(location.href, true);
-    var proxyUrl = domain + '/apps/admin-check/admin.php';
+    var proxyUrl = '//' + domain + '/apps/admin-check/test.php';
     console.log('Domain: ', domain);
     console.log('proxyUrl: ', proxyUrl);
     ajax.get(proxyUrl, {}, function(res) {
