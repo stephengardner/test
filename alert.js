@@ -68,7 +68,6 @@ function onlyParseProducts(callback) {
         } catch(e) {
             console.log('Not on product page');
         }
-      console.log("RESPONSE:", res);
     });
 }
 
