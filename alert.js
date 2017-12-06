@@ -111,13 +111,10 @@ function getUserType(callback) {
 var isProductPage = window.location.href.indexOf('products') !== -1;
 if(isProductPage) {
     getUserType(function(typeResponse) {
-        var type = typeResponse;
         onlyParseProducts(function(productResponse) {
-            console.log("Product response:", productResponse);
-            var product = productResponse.product;
             var input = {
-                type : type,
-                product : product
+                type : typeResponse,
+                product : productResponse
             };
             console.log('Submitting input: ', input);
         });
