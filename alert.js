@@ -1,4 +1,7 @@
 var ajax = {};
+var XCONF = {
+    api : ''   
+};
 ajax.x = function () {
     if (typeof XMLHttpRequest !== 'undefined') {
         return new XMLHttpRequest();
