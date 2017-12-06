@@ -34,13 +34,7 @@ ajax.send = function (url, callback, method, data, async) {
     x.onreadystatechange = function () {
         if (x.readyState == 4) {
             status = x;
-            console.log("Type:", x);
-            if (status === 200 && x.responseType === 'JSON') {
-                data = JSON.parse(x.responseText);
-                callback(data);
-            } else {
-                callback(x.responseText);
-            }
+            callback(x.responseText);
         }
     };
     if (method == 'POST') {
@@ -65,6 +59,22 @@ ajax.post = function (url, data, callback, async) {
     ajax.send(url, callback, 'POST', query.join('&'), async)
 };
 
-ajax.get(window.location.href + '.json', {}, function(res) {
-  console.log("RESPONSE:", res);
-});
+
+function onlyParseProducts(callback) {
+    ajax.get(window.location.href + '.json', {}, function(res) {
+        try {
+            res = JSON.parse(res);
+            return callback(res.product);
+        } catch(e) {
+            console.log('Not on product page');
+        }
+      console.log("RESPONSE:", res);
+    });
+}
+
+function afterHTTP(response) {
+   if(!response) return;
+    console.log("Got product:", response);
+}
+
+onlyParseProducts(afterHTTP);
