@@ -94,12 +94,14 @@ function onlyParseProducts(callback) {
 function getUserType(callback) {
     var domain = getDomain(location.href, true);
     var proxyUrl = domain + '/apps/admin-check/admin.php';
+    console.log('Domain: ', domain);
+    console.log('proxyUrl: ', proxyUrl);
     ajax.get(proxyUrl, {}, function(res) {
         try {
             res = JSON.parse(res);
             return callback(res.product);
         } catch(e) {
-            console.log('Not on product page');
+            console.log('Bad user type');
         }
     });
 }
