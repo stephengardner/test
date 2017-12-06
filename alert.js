@@ -113,7 +113,7 @@ if(isProductPage) {
     getUserType(function(typeResponse) {
         onlyParseProducts(function(productResponse) {
             var input = {
-                type : typeResponse,
+                userType : typeResponse,
                 product : productResponse
             };
             console.log('Submitting input: ', input);
