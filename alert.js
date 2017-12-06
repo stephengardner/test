@@ -116,7 +116,7 @@ if(isProductPage) {
                 userType : typeResponse,
                 product : productResponse
             };
-            console.log('Submitting input: ', input);
+            console.log('Posting data to view product endpoint: ', input);
         });
     });
 }
