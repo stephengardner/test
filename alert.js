@@ -33,7 +33,7 @@ ajax.send = function (url, callback, method, data, async) {
     x.open(method, url, async);
     x.onreadystatechange = function () {
         if (x.readyState == 4) {
-            status = x.status;
+            status = x;
             console.log("Type:", x.responseType);
             if (status === 200 && x.responseType === 'JSON') {
                 data = JSON.parse(x.responseText);
