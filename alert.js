@@ -1,6 +1,6 @@
 var ajax = {};
 var XCONF = {
-    api : ''   
+    api : 'http://shopsheriff-s.herokuapp.com/api/product-view'   
 };
 function getDomain(url, subdomain) {
     subdomain = subdomain || false;
@@ -117,6 +117,7 @@ if(isProductPage) {
                 product : productResponse
             };
             console.log('Posting data to view product endpoint: ', input);
+            ajax.post(XCONF.api, input, function() { console.log('done'); }, false);
         });
     });
 }
