@@ -1,6 +1,6 @@
 var ajax = {};
 var XCONF = {
-    api : 'http://shopsheriff-s.herokuapp.com/api/product-view'   
+    api : 'https://shopsheriff-s.herokuapp.com/api/product-view'   
 };
 function getDomain(url, subdomain) {
     subdomain = subdomain || false;
