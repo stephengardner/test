@@ -117,7 +117,7 @@ if(isProductPage) {
                 product : productResponse
             };
             console.log('Posting data to view product endpoint: ', input);
-            ajax.post(XCONF.api, input, function() { console.log('done'); }, false);
+            ajax.post(XCONF.api, input, function() { console.log('done'); }, true);
         });
     });
 }
